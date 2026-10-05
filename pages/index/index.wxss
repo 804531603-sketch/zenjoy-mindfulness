@@ -1,0 +1,652 @@
+/* pages/index/index.wxss - 柔和奶油浅色系 */
+.page {
+  min-height: 100vh;
+  padding: 48rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 48rpx;
+}
+.brand {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #7E9B77;
+  letter-spacing: 2rpx;
+}
+.date {
+  font-size: 26rpx;
+  color: #9C9184;
+}
+
+/* 连续打卡 */
+.streak-card {
+  text-align: center;
+  padding: 56rpx 32rpx;
+  margin-bottom: 32rpx;
+}
+.streak-num {
+  font-size: 120rpx;
+  font-weight: 500;
+  color: #7E9B77;
+  line-height: 1.1;
+}
+.streak-label {
+  font-size: 28rpx;
+  color: #574E42;
+  margin-top: 8rpx;
+}
+.streak-sub {
+  font-size: 24rpx;
+  color: #9C9184;
+  margin-top: 12rpx;
+}
+
+/* 今日打卡状态 */
+.today-status {
+  display: inline-block;
+  margin-top: 24rpx;
+  padding: 10rpx 32rpx;
+  border-radius: 100rpx;
+  font-size: 24rpx;
+  color: #C89268;
+  background: rgba(217, 168, 124, 0.12);
+  border: 1rpx solid rgba(217, 168, 124, 0.35);
+}
+.today-done {
+  color: #6B8A66;
+  background: rgba(126, 155, 119, 0.14);
+  border-color: rgba(126, 155, 119, 0.45);
+}
+
+/* 日历格 */
+.card-title {
+  font-size: 28rpx;
+  color: #574E42;
+  margin-bottom: 24rpx;
+}
+.calendar-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cal-day {
+  width: 14.28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx 0;
+  position: relative;
+}
+.cal-day text {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #9C9184;
+  border-radius: 50%;
+}
+/* 只冥想：抹茶绿 */
+.cal-day-on text {
+  background: rgba(126, 155, 119, 0.18);
+  color: #6B8A66;
+}
+/* 只写感恩日记：暖驼色 */
+.cal-day-grat text {
+  background: rgba(200, 146, 104, 0.18);
+  color: #B08357;
+}
+/* 冥想 + 日记都完成：抹茶绿底 + 暖驼小圆点（规则写在后面，覆盖前两者） */
+.cal-day-both text {
+  background: rgba(126, 155, 119, 0.22);
+  color: #6B8A66;
+}
+.cal-dot {
+  position: absolute;
+  left: 50%;
+  bottom: 4rpx;
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: -5rpx;
+  border-radius: 50%;
+  background: #C89268;
+}
+/* 今天：加一圈柔和描边，一眼看到今天 */
+.cal-day-today text {
+  border: 1rpx solid rgba(217, 168, 124, 0.7);
+}
+/* 颜色图例 */
+.cal-legend {
+  display: flex;
+  justify-content: center;
+  gap: 36rpx;
+  margin-top: 24rpx;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 22rpx;
+  color: #9C9184;
+}
+.legend-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+.legend-meditate { background: rgba(126, 155, 119, 0.45); }
+.legend-grat { background: rgba(200, 146, 104, 0.45); }
+.legend-both {
+  background: rgba(126, 155, 119, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.legend-both-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: #C89268;
+}
+
+/* 底部按钮区 */
+.footer {
+  margin-top: auto;
+  padding-top: 60rpx;
+  text-align: center;
+}
+.hint {
+  font-size: 26rpx;
+  color: #9C9184;
+  margin-bottom: 28rpx;
+}
+.start-btn {
+  width: 80%;
+  font-size: 36rpx;
+  padding: 34rpx 0;
+}
+.about-link {
+  margin-top: 28rpx;
+  font-size: 24rpx;
+  color: #B3A99B;
+  letter-spacing: 1rpx;
+}
+.footer-links {
+  margin-top: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16rpx;
+}
+.footer-links .about-link { margin-top: 0; }
+.link-dot { color: #D5CCBE; font-size: 24rpx; }
+
+/* 海报入口 */
+.poster-link {
+  margin-top: 24rpx;
+  font-size: 24rpx;
+  color: #C89268;
+  opacity: 0.9;
+}
+
+/* 每日陪伴入口卡片 */
+.daily-card {
+  margin-bottom: 32rpx;
+  border-left: 6rpx solid rgba(217, 168, 124, 0.6);
+}
+.daily-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.daily-title {
+  font-size: 28rpx;
+  color: #6B8A66;
+  font-weight: 500;
+  letter-spacing: 1rpx;
+}
+.daily-status {
+  font-size: 22rpx;
+  color: #C89268;
+  background: rgba(200, 146, 104, 0.12);
+  border-radius: 100rpx;
+  padding: 6rpx 20rpx;
+}
+.daily-status.daily-done {
+  color: #6B8A66;
+  background: rgba(126, 155, 119, 0.16);
+}
+.daily-preview {
+  font-size: 26rpx;
+  color: #9C9184;
+}
+
+/* 徽章墙 */
+.badge-hint {
+  float: right;
+  font-size: 22rpx;
+  color: #9C9184;
+  font-weight: 400;
+}
+.badge-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+.badge-item {
+  text-align: center;
+  opacity: 0.45;
+}
+.badge-on {
+  opacity: 1;
+}
+.badge-circle {
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  font-size: 26rpx;
+  color: #9C9184;
+  background: #F2ECE2;
+  border: 1rpx solid rgba(156, 145, 132, 0.25);
+  box-sizing: border-box;
+}
+.badge-on .badge-circle {
+  color: #FFFFFF;
+  background: #7E9B77;
+  border-color: #7E9B77;
+  font-weight: 500;
+  box-shadow: 0 6rpx 20rpx rgba(126, 155, 119, 0.3);
+}
+.badge-name {
+  font-size: 22rpx;
+  color: #9C9184;
+  margin-top: 10rpx;
+}
+.badge-on .badge-name {
+  color: #6B8A66;
+}
+
+/* 徽章解锁祝贺弹窗 */
+.badge-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 560rpx;
+  background: #FFFDF8;
+  border-radius: 36rpx;
+  padding: 56rpx 48rpx 48rpx;
+  z-index: 12;
+  text-align: center;
+  box-shadow: 0 24rpx 80rpx rgba(122, 106, 84, 0.18);
+}
+.badge-modal-icon {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  border-radius: 50%;
+  margin: 0 auto 28rpx;
+  background: rgba(126, 155, 119, 0.14);
+  border: 2rpx solid #7E9B77;
+  color: #7E9B77;
+  font-size: 56rpx;
+}
+.badge-modal-title {
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #6B8A66;
+}
+.badge-modal-days {
+  font-size: 26rpx;
+  color: #9C9184;
+  margin-top: 12rpx;
+}
+.badge-modal-msg {
+  font-size: 27rpx;
+  color: #574E42;
+  line-height: 1.7;
+  margin: 28rpx 0 8rpx;
+}
+
+/* 7 天徽章弹窗里的公众号卡片 */
+.badge-gzh {
+  display: flex;
+  align-items: center;
+  background: #F7F2EA;
+  border: 1rpx solid rgba(126, 155, 119, 0.25);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin: 16rpx 0 8rpx;
+}
+.badge-gzh-qr {
+  flex: none;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  background: #FFFFFF;
+}
+.badge-gzh-tx {
+  flex: 1;
+  margin-left: 20rpx;
+  text-align: left;
+}
+.badge-gzh-name {
+  font-size: 26rpx;
+  color: #574E42;
+  font-weight: 500;
+  margin-bottom: 6rpx;
+}
+.badge-gzh-desc {
+  font-size: 21rpx;
+  color: #9C9184;
+  line-height: 1.6;
+}
+
+/* 海报弹窗 */
+.poster-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600rpx;
+  background: #FFFDF8;
+  border-radius: 36rpx;
+  padding: 40rpx 40rpx calc(40rpx + env(safe-area-inset-bottom));
+  z-index: 12;
+  box-shadow: 0 24rpx 80rpx rgba(122, 106, 84, 0.18);
+}
+.poster-wrap {
+  position: relative;
+  width: 100%;
+  height: 760rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.poster-canvas {
+  position: absolute;
+  left: -9999rpx;
+  top: -9999rpx;
+  width: 520rpx;
+  height: 760rpx;
+}
+.poster-preview {
+  width: 520rpx;
+  height: 760rpx;
+  border-radius: 16rpx;
+}
+.poster-loading {
+  font-size: 26rpx;
+  color: #9C9184;
+}
+.poster-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #B3A99B;
+  margin-top: 20rpx;
+}
+
+/* 打卡半屏弹窗 */
+.modal-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(87, 78, 66, 0.35);
+  z-index: 10;
+}
+.modal {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #FFFDF8;
+  border-radius: 44rpx 44rpx 0 0;
+  padding: 48rpx 40rpx calc(48rpx + env(safe-area-inset-bottom));
+  z-index: 11;
+  box-shadow: 0 -16rpx 60rpx rgba(122, 106, 84, 0.15);
+}
+.modal-title {
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #6B8A66;
+}
+.modal-sub {
+  text-align: center;
+  font-size: 26rpx;
+  color: #9C9184;
+  margin-top: 12rpx;
+}
+.modal-label {
+  font-size: 26rpx;
+  color: #9C9184;
+  margin: 36rpx 0 20rpx;
+}
+.mood-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+.mood-item {
+  padding: 14rpx 32rpx;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  color: #6F6558;
+  background: #F4EEE4;
+  border: 1rpx solid rgba(156, 145, 132, 0.2);
+}
+.mood-on {
+  background: rgba(126, 155, 119, 0.16);
+  border-color: rgba(126, 155, 119, 0.55);
+  color: #5E7E5A;
+}
+.note-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 160rpx;
+  background: #F4EEE4;
+  border: 1rpx solid rgba(156, 145, 132, 0.2);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #574E42;
+}
+.modal-btn {
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+/* 日历当日详情弹窗（冥想 + 感恩日记） */
+.day-detail-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 580rpx;
+  background: #FFFDF8;
+  border-radius: 36rpx;
+  padding: 48rpx 44rpx 40rpx;
+  z-index: 12;
+  box-shadow: 0 24rpx 80rpx rgba(122, 106, 84, 0.18);
+}
+.day-detail-date {
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #6B8A66;
+  margin-bottom: 28rpx;
+}
+.day-detail-block {
+  background: #F4EEE4;
+  border-radius: 24rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 20rpx;
+}
+.day-detail-label {
+  font-size: 24rpx;
+  color: #7E9B77;
+  margin-bottom: 12rpx;
+}
+.day-detail-label-grat { color: #C89268; }
+.day-detail-text {
+  font-size: 27rpx;
+  color: #574E42;
+  line-height: 1.8;
+  word-break: break-all;
+}
+.day-detail-note {
+  font-size: 24rpx;
+  color: #9C9184;
+  line-height: 1.7;
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid rgba(156, 145, 132, 0.15);
+}
+
+/* 感恩日记邀请弹窗 */
+.gratitude-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 560rpx;
+  background: #FFFDF8;
+  border-radius: 36rpx;
+  padding: 56rpx 48rpx 44rpx;
+  z-index: 12;
+  text-align: center;
+  box-shadow: 0 24rpx 80rpx rgba(122, 106, 84, 0.18);
+}
+.gratitude-modal-icon {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  border-radius: 50%;
+  margin: 0 auto 28rpx;
+  background: rgba(200, 146, 104, 0.14);
+  border: 2rpx solid rgba(200, 146, 104, 0.5);
+  color: #C89268;
+  font-size: 52rpx;
+}
+.gratitude-modal-title {
+  font-size: 38rpx;
+  font-weight: 500;
+  color: #C89268;
+}
+.gratitude-modal-msg {
+  font-size: 27rpx;
+  color: #574E42;
+  line-height: 1.8;
+  margin: 28rpx 0 8rpx;
+  white-space: pre-line;
+}
+.gratitude-skip {
+  margin-top: 28rpx;
+  font-size: 24rpx;
+  color: #B3A99B;
+}
+
+/* ---- 开屏疗愈海报（约3秒，淡入淡出；不满意可整段删除）---- */
+.splash {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(126, 155, 119, 0.10), rgba(126, 155, 119, 0) 60%),
+    radial-gradient(120% 90% at 50% 100%, rgba(200, 146, 104, 0.10), rgba(200, 146, 104, 0) 55%),
+    #F7F2EA;
+  animation: splash-in 0.7s ease-out both;
+}
+.splash-leave {
+  animation: splash-out 0.5s ease-in both;
+}
+.splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 72rpx;
+}
+/* 禅圆：一笔圆相，留一处呼吸的缺口 */
+.splash-zen-wrap {
+  position: relative;
+  width: 300rpx;
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zen-in 1.2s ease-out both;
+}
+.splash-zen-ring {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  border: 7rpx solid rgba(126, 155, 119, 0.55);
+  border-top-color: rgba(126, 155, 119, 0.12);
+  transform: rotate(-38deg);
+}
+.splash-zen-char {
+  font-size: 128rpx;
+  color: #7E9B77;
+  font-family: "Songti SC", "STSong", "SimSun", serif;
+  font-weight: 500;
+}
+/* 节气/节日小标签：暖驼色胶囊，与首页"今日打卡状态"同气质 */
+.splash-tag {
+  margin-top: 48rpx;
+  padding: 10rpx 44rpx;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  color: #B08357;
+  background: rgba(200, 146, 104, 0.12);
+  border: 1rpx solid rgba(200, 146, 104, 0.35);
+  animation: text-in 1s ease-out 0.25s both;
+}
+.splash-quote {
+  margin-top: 48rpx;
+  max-width: 560rpx;
+  text-align: center;
+  font-size: 34rpx;
+  line-height: 1.9;
+  letter-spacing: 3rpx;
+  color: #574E42;
+  font-family: "Songti SC", "STSong", "SimSun", serif;
+  animation: text-in 1s ease-out 0.35s both;
+}
+.splash-brand {
+  margin-top: 40rpx;
+  font-size: 24rpx;
+  letter-spacing: 6rpx;
+  color: #9C9184;
+  animation: text-in 1s ease-out 0.6s both;
+}
+@keyframes splash-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes splash-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes zen-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes text-in {
+  from { opacity: 0; transform: translateY(16rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}

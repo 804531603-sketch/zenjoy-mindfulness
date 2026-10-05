@@ -1,0 +1,52 @@
+/* app.wxss - 全局样式（柔和奶油浅色主题） */
+/* 色板：
+   底色  #F7F2EA（暖奶油）   卡片 #FFFFFF
+   主文字 #574E42（暖深棕）   次文字 #9C9184（暖灰）
+   主点缀 #7E9B77（鼠尾草绿） 点缀二 #D9A87C（柔杏） */
+page {
+  background: #F7F2EA;
+  color: #574E42;
+  font-size: 28rpx;
+  line-height: 1.6;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+/* 主题色变量（柔和浅色系） */
+.theme-text-primary { color: #574E42; }
+.theme-text-muted   { color: #9C9184; }
+.theme-accent       { color: #7E9B77; }
+
+/* 通用卡片：白底 + 柔和投影，不刺眼 */
+.card {
+  background: #FFFFFF;
+  border: none;
+  border-radius: 28rpx;
+  padding: 32rpx;
+  box-shadow: 0 8rpx 32rpx rgba(122, 106, 84, 0.08);
+}
+
+/* 主按钮：鼠尾草绿柔和渐变 */
+.btn-primary {
+  background: linear-gradient(135deg, #93B18A, #7E9B77);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 100rpx;
+  padding: 28rpx 0;
+  text-align: center;
+  letter-spacing: 4rpx;
+  box-shadow: 0 10rpx 28rpx rgba(126, 155, 119, 0.28);
+}
+.btn-primary::after { border: none; }
+
+/* 次级按钮：奶油底柔和描边 */
+.btn-ghost {
+  background: #FFFFFF;
+  color: #7E9B77;
+  font-size: 28rpx;
+  border-radius: 100rpx;
+  padding: 20rpx 48rpx;
+  text-align: center;
+  border: 1rpx solid rgba(126, 155, 119, 0.35);
+}
+.btn-ghost::after { border: none; }

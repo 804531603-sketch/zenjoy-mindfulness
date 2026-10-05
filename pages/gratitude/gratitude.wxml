@@ -1,0 +1,41 @@
+<view class="page">
+  <!-- 顶部引导语 -->
+  <view class="hero">
+    <view class="hero-title">感恩日记</view>
+    <view class="hero-sub">收集一天里的光，记下此刻想感谢的事</view>
+  </view>
+
+  <!-- 今天的书写区 -->
+  <view class="write-card">
+    <textarea
+      class="write-input"
+      placeholder="今天，我想感谢…"
+      placeholder-class="write-ph"
+      value="{{inputText}}"
+      bindinput="onInput"
+      maxlength="500"
+      auto-height
+    ></textarea>
+    <view class="write-footer">
+      <view class="char-count">{{charCount}}/500</view>
+      <button class="save-btn" bindtap="onSave">{{inputText ? '保存' : '写完了'}}</button>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="history-section" wx:if="{{!isEmpty}}">
+    <view class="history-title">过去的感恩</view>
+    <view class="history-item" wx:for="{{history}}" wx:key="date">
+      <view class="history-date">{{item.dateText}}</view>
+      <view class="history-text">{{item.text}}</view>
+      <view class="history-del" data-date="{{item.date}}" bindtap="onDelete">删除</view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{isEmpty}}">
+    <view class="empty-icon">☁</view>
+    <view class="empty-text">还没有感恩记录</view>
+    <view class="empty-sub">冥想结束后，写下今天想感谢的事吧</view>
+  </view>
+</view>

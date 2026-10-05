@@ -1,0 +1,75 @@
+<!-- pages/daily/daily.wxml - 每日陪伴：今日一思 + 今日一练 -->
+<view class="page">
+  <!-- 顶部：天数导航（前一天 / 今天 / 后一天） -->
+  <view class="day-nav">
+    <view class="day-nav-btn" bindtap="onPrevDay">‹ 前一天</view>
+    <view class="day-nav-center" bindtap="onBackToday">
+      <view class="day-nav-no">第 {{item.day}}/{{totalDays}} 天</view>
+      <view class="day-nav-tag {{dayIndex === todayIndex ? 'day-nav-today' : ''}}">
+        {{dayIndex === todayIndex ? '今天' : '回今天'}}
+      </view>
+    </view>
+    <view class="day-nav-btn" bindtap="onNextDay">后一天 ›</view>
+  </view>
+
+  <block wx:if="{{item}}">
+    <!-- 标题 -->
+    <view class="hero">
+      <view class="hero-title">{{item.title}}</view>
+      <view class="hero-sub">今日陪伴 · 一思一练</view>
+    </view>
+
+    <!-- 卡片一：今日一思 -->
+    <view class="card thought-card">
+      <view class="card-tag">今日一思</view>
+      <view class="thought-text">{{item.thought}}</view>
+      <!-- 轻提醒：一句话，方便大家时刻谨记（定位：提醒+微习惯，不是任务） -->
+      <view class="reminder-line" wx:if="{{item.reminder}}">
+        <view class="reminder-star">✧</view>
+        <view class="reminder-text">今日谨记：{{item.reminder}}</view>
+      </view>
+    </view>
+
+    <!-- 卡片二：今日一练 -->
+    <view class="card practice-card">
+      <view class="card-tag card-tag-practice">今日一练 · {{item.practiceName}}</view>
+
+      <!-- 语音引导：彤彤录的练习引导（有音频显示播放按钮，未录制显示温柔占位） -->
+      <view class="voice-bar" wx:if="{{voiceReady}}" bindtap="onToggleVoice">
+        <view class="voice-icon">{{voicePlaying ? '❚❚' : '▶'}}</view>
+        <view class="voice-text">
+          {{voiceLoading ? '引导音频加载中…' : (voicePlaying ? '正在播放 · 点击暂停' : '听语音引导，跟着彤彤一起做')}}
+        </view>
+      </view>
+      <view class="voice-bar voice-bar-off" wx:else>
+        <view class="voice-icon">☁</view>
+        <view class="voice-text">语音引导准备中，先照文字步骤做吧</view>
+      </view>
+
+      <view class="practice-steps">
+        <view class="practice-step" wx:for="{{item.practiceSteps}}" wx:for-item="step" wx:key="index">
+          <view class="practice-step-no">{{index + 1}}</view>
+          <view class="practice-step-text">{{step}}</view>
+        </view>
+      </view>
+
+      <!-- 完成按钮：只在"今天"且未完成时可打卡 -->
+      <view wx:if="{{dayIndex === todayIndex}}">
+        <view
+          class="practice-done-btn {{practiceDone ? 'practice-done-on' : ''}}"
+          bindtap="onDonePractice"
+        >
+          {{practiceDone ? '✓ 今天已练习，真棒' : '我完成了今天的练习'}}
+        </view>
+        <view class="practice-count" wx:if="{{totalDoneCount > 0}}">
+          累计已练习 {{totalDoneCount}} 天
+        </view>
+      </view>
+      <!-- 翻到别的日子：只看不打卡，温和提示 -->
+      <view wx:else class="practice-hint">回到今天，就可以打卡啦</view>
+    </view>
+  </block>
+
+  <!-- 加载中（极端情况：云端与本地都未就绪） -->
+  <view class="loading" wx:if="{{!item}}">正在准备今天的内容…</view>
+</view>

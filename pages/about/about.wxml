@@ -1,0 +1,72 @@
+<view class="page">
+  <view class="section">
+    <view class="logo" bindtap="onTapLogo">禅</view>
+    <view class="app-name">禅悦 · 正念打卡</view>
+    <view class="version">{{version}}</view>
+    <view class="slogan">当下的人生，就是最完美的了</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">关于禅悦</view>
+    <view class="para">
+      禅悦是一款轻量级的正念冥想辅助工具，帮助你养成每日静坐的习惯。
+      我们提供白噪音与疗愈音乐、呼吸引导和打卡记录，陪你把心带回当下。
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">把这份安静带回家</view>
+    <view class="para small">
+      录好了 7 天正念引导音频，送给愿意慢下来的你。睡不着的时候、心乱的时候，戴上耳机就能用。
+    </view>
+    <view class="gift-btn" bindtap="onGoLead">领取 7 天正念音频</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">练习路上，想说说话</view>
+    <view class="gzh-card">
+      <image class="gzh-qr" src="/images/gzh-qrcode.jpg" mode="aspectFit" show-menu-by-longpress="{{true}}"></image>
+      <view class="gzh-tx">
+        <view class="gzh-name">公众号「彤彤姐」</view>
+        <view class="gzh-desc">
+          <view>这里有人懂你的累，也陪你慢慢变好。</view>
+          <view>长按二维码，随时来找我。</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">音源与致谢</view>
+    <view class="para small">
+      本小程序使用的音频均来自公开免费素材站，许可如下：
+    </view>
+    <view class="credit-item" wx:for="{{credits}}" wx:key="name">
+      <view class="credit-name">{{item.name}}</view>
+      <view class="credit-license">{{item.license}}</view>
+    </view>
+    <view class="para small">
+      遵循 CC BY 4.0 许可的作品，感谢原作者的慷慨分享；
+      CC0 作品属于公有领域。
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">关于你的数据</view>
+    <view class="para small">
+      打卡记录会同步到云端，只为换手机时记录不丢。我们只保留一个与你身份无关的匿名编号，
+      <text class="strong">看不到你是谁</text>；你的随笔内容不被用于任何其他用途。
+      只有当你主动填写并送出联系方式时，我们才知道该把音频发给谁。
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">温馨提示</view>
+    <view class="para small">
+      禅悦用于日常放松与正念练习辅助，不构成任何医疗建议。
+      如你有持续的情绪困扰或睡眠问题，请及时寻求专业帮助。
+    </view>
+  </view>
+
+  <view class="copyright">© 2026 禅悦 · 愿你心安</view>
+</view>

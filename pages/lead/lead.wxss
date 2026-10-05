@@ -1,0 +1,85 @@
+/* pages/lead/lead.wxss - 柔和奶油浅色系 */
+.page {
+  min-height: 100vh;
+  padding: 80rpx 56rpx calc(80rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.gift-icon {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  margin: 0 auto 40rpx;
+  border-radius: 50%;
+  background: rgba(126, 155, 119, 0.12);
+  border: 1rpx solid rgba(126, 155, 119, 0.35);
+  color: #7E9B77;
+  font-size: 52rpx;
+}
+
+.done-icon {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  margin: 0 auto 40rpx;
+  border-radius: 50%;
+  background: rgba(126, 155, 119, 0.15);
+  color: #7E9B77;
+  font-size: 56rpx;
+}
+
+.title {
+  font-size: 38rpx;
+  color: #574E42;
+  letter-spacing: 2rpx;
+  margin-bottom: 28rpx;
+}
+
+.sub {
+  font-size: 27rpx;
+  color: #9C9184;
+  line-height: 1.9;
+  text-align: left;
+  margin-bottom: 56rpx;
+}
+
+.form {
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1rpx solid rgba(156, 145, 132, 0.2);
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx;
+  font-size: 29rpx;
+  color: #574E42;
+  margin-bottom: 32rpx;
+}
+.ph {
+  color: #B3A99B;
+}
+
+.submit {
+  margin-bottom: 28rpx;
+}
+
+.privacy {
+  font-size: 23rpx;
+  color: #B3A99B;
+  line-height: 1.8;
+}
+
+.back {
+  margin: 40rpx auto 0;
+  display: inline-block;
+}
+
+.skip {
+  margin-top: 48rpx;
+  font-size: 26rpx;
+  color: #B3A99B;
+}

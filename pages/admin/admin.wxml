@@ -1,0 +1,103 @@
+<view class="page">
+  <!-- 未登录 -->
+  <block wx:if="{{!authed}}">
+    <view class="gate-icon">禅</view>
+    <view class="gate-title">访客看板</view>
+    <view class="gate-sub">只有你能看到这里</view>
+    <input
+      class="input"
+      password
+      placeholder="输入管理密码"
+      placeholder-class="ph"
+      value="{{pwd}}"
+      bindinput="onPwdInput"
+      confirm-type="go"
+      bindconfirm="onLogin"
+    />
+    <view class="btn-primary login" bindtap="onLogin">{{loading ? '正在读取…' : '进入看板'}}</view>
+    <view class="err" wx:if="{{err}}">{{err}}</view>
+    <view class="gate-tip" wx:if="{{cloudOff}}">
+      云开发还没连上：开发者工具点「云开发」开通后，把环境 ID 填进 utils/cloud.js
+    </view>
+  </block>
+
+  <!-- 已登录 -->
+  <block wx:else>
+    <view class="head">
+      <view class="head-title">访客看板</view>
+      <view class="head-time">{{updatedAt}} 更新</view>
+    </view>
+
+    <view class="stats" wx:if="{{stats}}">
+      <view class="stat">
+        <view class="stat-num">{{stats.total}}</view>
+        <view class="stat-label">总访客</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.todayActive}}</view>
+        <view class="stat-label">今日来访</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.todayNew}}</view>
+        <view class="stat-label">今日新客</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.leads}}</view>
+        <view class="stat-label">留下微信</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.active7}}</view>
+        <view class="stat-label">7日活跃</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.checkins}}</view>
+        <view class="stat-label">累计打卡</view>
+      </view>
+    </view>
+
+    <view class="rate" wx:if="{{stats}}">
+      每 100 位访客里，有 {{stats.rate}} 位留下了联系方式
+    </view>
+
+    <view class="tabs">
+      <view class="tab {{tab === 'visitor' ? 'on' : ''}}" data-tab="visitor" bindtap="onSwitchTab">
+        访客 {{list.length}}
+      </view>
+      <view class="tab {{tab === 'lead' ? 'on' : ''}}" data-tab="lead" bindtap="onSwitchTab">
+        留资 {{leadList.length}}
+      </view>
+    </view>
+
+    <!-- 访客列表 -->
+    <block wx:if="{{tab === 'visitor'}}">
+      <view class="empty" wx:if="{{!list.length}}">还没有访客记录，等小程序有人打开就会出现在这一行</view>
+      <view class="item" wx:for="{{list}}" wx:key="tail">
+        <view class="item-top">
+          <view class="item-no">#{{item.no}}</view>
+          <view class="item-id">{{item.tail}}</view>
+          <view class="tag" wx:if="{{item.lead}}">已留资</view>
+        </view>
+        <view class="item-row">首次 {{item.first}} · 最近 {{item.last}}</view>
+        <view class="item-row muted">打开 {{item.visits}} 次 · 打卡 {{item.checkins}} 次</view>
+        <view class="item-contact" wx:if="{{item.lead}}" data-text="{{item.lead}}" bindlongtap="onCopy">
+          {{item.lead}}（长按复制）
+        </view>
+      </view>
+    </block>
+
+    <!-- 留资列表 -->
+    <block wx:else>
+      <view class="empty" wx:if="{{!leadList.length}}">还没有人留微信。打卡 3 天以上的用户会自动收到邀请</view>
+      <view class="item" wx:for="{{leadList}}" wx:key="index">
+        <view class="item-lead" data-text="{{item.contact}}" bindlongtap="onCopy">{{item.contact}}</view>
+        <view class="item-row muted">{{item.at}} · {{item.source}} · 访客 {{item.tail}}</view>
+        <view class="item-hint">长按复制，去微信添加</view>
+      </view>
+    </block>
+
+    <view class="actions">
+      <view class="btn-ghost" bindtap="onRefresh">{{loading ? '刷新中…' : '刷新数据'}}</view>
+      <view class="logout" bindtap="onLogout">退出</view>
+    </view>
+  </block>
+</view>

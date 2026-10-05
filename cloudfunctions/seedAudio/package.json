@@ -1,0 +1,9 @@
+{
+  "name": "seedAudio",
+  "version": "1.0.0",
+  "description": "一次性：把13个音频从静态站搬进云存储并列出文件ID",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,154 @@
+<view class="page" style="padding-top: {{statusBarHeight + 40}}px;">
+  <!-- 星空背景（纯 CSS，不用大图） -->
+  <view class="stars"></view>
+
+
+  <!-- 顶部：今日禅语 + 已冥想时长 -->
+  <view class="top">
+    <view class="quote">「{{quote}}」</view>
+    <view class="elapsed">已静坐 {{elapsedText}}</view>
+  </view>
+
+  <!-- 中部：呼吸圆环（CSS 动画 4-4-4：吸气放大→屏息→呼气缩小） -->
+  <view class="center">
+    <view class="breath-ring">
+      <view class="breath-core">
+        <text class="breath-text">{{breathText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部：音乐列表 + 控制条 + 定时 + 结束按钮 -->
+  <view class="bottom">
+    <!-- 疗愈音乐 -->
+    <view class="list-title">疗愈音乐</view>
+    <scroll-view class="track-list" scroll-x enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{tracks}}"
+        wx:key="id"
+        wx:if="{{!item.noLoop}}"
+        class="track-item {{currentTrackIndex === index ? 'track-on' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectTrack"
+      >
+        <view class="track-name">{{item.name}}{{item.url ? '' : ' · 敬请期待'}}</view>
+        <view class="track-desc">{{item.desc}}</view>
+      </view>
+    </scroll-view>
+
+    <!-- 语音引导：彤彤原创录音，按编号列在同一个栏目下 -->
+    <view class="list-title">语音引导</view>
+    <scroll-view class="track-list" scroll-x enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{tracks}}"
+        wx:key="id"
+        wx:if="{{item.noLoop && !item.category}}"
+        class="track-item {{currentTrackIndex === index ? 'track-on' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectTrack"
+      >
+        <view class="track-name">{{item.name}}</view>
+        <view class="track-desc">{{item.desc}}</view>
+      </view>
+    </scroll-view>
+
+    <!-- 356 跟练：每日一练语音引导（持续更新，当前预留） -->
+    <view class="list-title">356 跟练</view>
+    <scroll-view class="track-list" scroll-x enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{tracks}}"
+        wx:key="id"
+        wx:if="{{item.category === 'follow'}}"
+        class="track-item {{currentTrackIndex === index ? 'track-on' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectTrack"
+      >
+        <view class="track-name">{{item.name}}{{item.url ? '' : ' · 敬请期待'}}</view>
+        <view class="track-desc">{{item.desc}}</view>
+      </view>
+    </scroll-view>
+
+    <!-- 播放控制行：上一首 / 播放暂停 / 下一首（紧跟语音引导，随时够得着） -->
+    <view class="control-row">
+      <view class="btn-ghost skip-btn" bindtap="onPrev">上一首</view>
+      <view class="btn-ghost play-btn" bindtap="onTogglePlay">
+        {{playing ? '暂停' : '播放'}}
+      </view>
+      <view class="btn-ghost skip-btn" bindtap="onNext">下一首</view>
+    </view>
+
+    <!-- 定时 + 加载状态 -->
+    <view class="control-row">
+      <picker
+        mode="selector"
+        range="{{timerOptions}}"
+        range-key="label"
+        value="{{timerIndex}}"
+        bindchange="onTimerChange"
+        class="timer-picker"
+      >
+        <view class="btn-ghost timer-btn">定时：{{timerOptions[timerIndex].label}}</view>
+      </picker>
+      <view class="loading-hint" wx:if="{{trackLoading}}">{{loadHintText}}</view>
+    </view>
+
+    <!-- 音乐进度条（有曲目时显示，可拖动跳转） -->
+    <view class="progress-row" wx:if="{{audioDuration > 0}}">
+      <view class="progress-time">{{audioCurrentText}}</view>
+      <slider
+        class="progress-bar"
+        min="0"
+        max="{{audioDuration}}"
+        value="{{audioCurrent}}"
+        activeColor="#7E9B77"
+        backgroundColor="rgba(156,145,132,0.22)"
+        block-size="14"
+        bindchange="onSeek"
+      ></slider>
+      <view class="progress-time">{{audioDurationText}}</view>
+    </view>
+
+    <!-- 第三板块：感恩日记（与疗愈音乐、语音引导并列，静坐后的温柔延伸） -->
+    <view class="list-title">感恩日记</view>
+    <view class="grat-card">
+      <textarea
+        class="grat-input"
+        placeholder="今天，我想感谢…"
+        placeholder-class="grat-ph"
+        value="{{gratInput}}"
+        bindinput="onGratInput"
+        maxlength="500"
+        auto-height
+      ></textarea>
+      <view class="grat-footer">
+        <view class="grat-count">{{gratCount}}/500</view>
+        <view class="grat-save" bindtap="onGratSave">{{gratInput ? '保存感恩' : '写完了'}}</view>
+      </view>
+      <!-- 最近三篇感恩：点日期展开全文，再点收起，不直接露全文 -->
+      <view class="grat-history" wx:if="{{gratHistory.length}}">
+        <view class="grat-item" wx:for="{{gratHistory}}" wx:key="date">
+          <view class="grat-item-head" data-date="{{item.date}}" bindtap="onToggleGratItem">
+            <text class="grat-item-date">{{item.dateText}}</text>
+            <view class="grat-item-ops">
+              <text class="grat-item-del" data-date="{{item.date}}" catchtap="onGratDelete">删除</text>
+              <text class="grat-item-arrow {{gratOpen === item.date ? 'grat-item-arrow-open' : ''}}">⌄</text>
+            </view>
+          </view>
+          <view class="grat-item-body" wx:if="{{gratOpen === item.date}}">
+            <view class="grat-item-text">{{item.text}}</view>
+          </view>
+        </view>
+        <view class="grat-more" bindtap="onGoGratitudeAll">查看全部感恩日记 →</view>
+      </view>
+      <view class="grat-empty" wx:else>静坐之后，写下今天想感谢的一件小事吧</view>
+    </view>
+
+    <!-- 顺路入口：每日陪伴 · 今日一练（想先静坐后练习的，随时过去） -->
+    <view class="daily-entry" bindtap="onGoDaily">
+      ☁ 每日陪伴 · 今日一练还没做？先去完成它
+    </view>
+
+    <!-- 结束冥想 -->
+    <button class="btn-primary end-btn" bindtap="onEnd">结束冥想 · 打卡</button>
+  </view>
+</view>

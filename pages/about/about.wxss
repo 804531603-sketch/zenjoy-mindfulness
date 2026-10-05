@@ -1,0 +1,133 @@
+/* pages/about/about.wxss - 柔和奶油浅色系 */
+.page {
+  min-height: 100vh;
+  padding: 60rpx 48rpx calc(60rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.section {
+  margin-bottom: 56rpx;
+  text-align: center;
+}
+.section-title {
+  text-align: left;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #6B8A66;
+  margin-bottom: 20rpx;
+}
+
+.logo {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  margin: 0 auto 24rpx;
+  border-radius: 50%;
+  background: rgba(126, 155, 119, 0.12);
+  border: 1rpx solid rgba(126, 155, 119, 0.35);
+  color: #7E9B77;
+  font-size: 56rpx;
+  text-align: center;
+}
+.app-name {
+  font-size: 36rpx;
+  color: #574E42;
+  letter-spacing: 2rpx;
+}
+.version {
+  font-size: 24rpx;
+  color: #9C9184;
+  margin-top: 8rpx;
+}
+.slogan {
+  font-size: 26rpx;
+  color: #9C9184;
+  margin-top: 24rpx;
+  letter-spacing: 1rpx;
+}
+
+.para {
+  text-align: left;
+  font-size: 27rpx;
+  color: #574E42;
+  line-height: 1.8;
+}
+.para.small {
+  font-size: 24rpx;
+  color: #9C9184;
+}
+.para .strong {
+  color: #7E9B77;
+}
+
+.gift-btn {
+  margin-top: 24rpx;
+  background: linear-gradient(135deg, #93B18A, #7E9B77);
+  color: #FFFFFF;
+  font-size: 30rpx;
+  border-radius: 100rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  letter-spacing: 2rpx;
+  box-shadow: 0 10rpx 28rpx rgba(126, 155, 119, 0.28);
+}
+
+.gzh-card {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1rpx solid rgba(156, 145, 132, 0.15);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 6rpx 24rpx rgba(122, 106, 84, 0.06);
+}
+.gzh-qr {
+  flex: none;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 16rpx;
+  background: #F7F2EA;
+}
+.gzh-tx {
+  flex: 1;
+  margin-left: 24rpx;
+  text-align: left;
+}
+.gzh-name {
+  font-size: 29rpx;
+  color: #574E42;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+}
+.gzh-desc {
+  font-size: 23rpx;
+  color: #9C9184;
+  line-height: 1.7;
+}
+
+.credit-item {
+  text-align: left;
+  background: #FFFFFF;
+  border: 1rpx solid rgba(156, 145, 132, 0.15);
+  border-radius: 20rpx;
+  padding: 20rpx 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 6rpx 24rpx rgba(122, 106, 84, 0.06);
+}
+.credit-name {
+  font-size: 27rpx;
+  color: #574E42;
+}
+.credit-license {
+  font-size: 23rpx;
+  color: #9C9184;
+  margin-top: 6rpx;
+  line-height: 1.6;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 22rpx;
+  color: #B3A99B;
+  margin-top: 40rpx;
+}

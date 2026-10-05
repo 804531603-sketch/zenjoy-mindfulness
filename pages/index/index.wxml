@@ -1,0 +1,198 @@
+<view class="page">
+  <!-- 顶部：日期与品牌 -->
+  <view class="header">
+    <view class="brand">禅悦 · 正念打卡</view>
+    <view class="date">{{todayText}}</view>
+  </view>
+
+  <!-- 连续打卡卡片 -->
+  <view class="card streak-card">
+    <view class="streak-num">{{streakDays}}</view>
+    <view class="streak-label">连续打卡天数</view>
+    <view class="streak-sub">累计冥想 {{totalMinutes}} 分钟 · 共打卡 {{totalDays}} 天</view>
+    <view class="today-status {{checkedToday ? 'today-done' : ''}}">
+      {{checkedToday ? '✓ 今天已打卡，为自己点赞' : '今天还没打卡，从一次呼吸开始'}}
+    </view>
+    <view class="poster-link" wx:if="{{streakDays > 0}}" bindtap="onShowPoster">生成打卡海报</view>
+  </view>
+
+  <!-- 每日陪伴入口：今日一思 + 今日一练（内容云端热更新） -->
+  <view class="card daily-card" bindtap="onGoDaily">
+    <view class="daily-head">
+      <view class="daily-title">每日陪伴 · 一思一练</view>
+      <view class="daily-status {{dailyPracticeDone ? 'daily-done' : ''}}">
+        {{dailyPracticeDone ? '✓ 已练习' : '今日练习'}}
+      </view>
+    </view>
+    <view class="daily-preview" wx:if="{{dailyItem}}">
+      第 {{dailyItem.day}} 天 · {{dailyItem.title}}
+    </view>
+    <view class="daily-preview" wx:else>今天的一思一练，正在路上…</view>
+  </view>
+
+  <!-- 本月日历格：三色标记（只冥想 / 只写日记 / 两者都完成） -->
+  <view class="card calendar-card">
+    <view class="card-title">本月打卡 {{monthCheckedCount}}/{{monthDays}} 天</view>
+    <view class="calendar-grid">
+      <view
+        wx:for="{{calendar}}"
+        wx:key="day"
+        class="cal-day {{item.checked ? 'cal-day-on' : ''}} {{item.hasGratitude ? 'cal-day-grat' : ''}} {{item.checked && item.hasGratitude ? 'cal-day-both' : ''}} {{item.isToday ? 'cal-day-today' : ''}}"
+        data-item="{{item}}"
+        bindtap="onTapCalendarDay"
+      >
+        <text>{{item.day}}</text>
+        <view class="cal-dot" wx:if="{{item.checked && item.hasGratitude}}"></view>
+      </view>
+    </view>
+    <!-- 颜色图例 -->
+    <view class="cal-legend">
+      <view class="legend-item"><view class="legend-dot legend-meditate"></view>冥想</view>
+      <view class="legend-item"><view class="legend-dot legend-grat"></view>感恩日记</view>
+      <view class="legend-item"><view class="legend-dot legend-both"><view class="legend-both-dot"></view></view>两者都完成</view>
+    </view>
+  </view>
+
+  <!-- 徽章墙 -->
+  <view class="card badge-card">
+    <view class="card-title">
+      坚持徽章
+      <text class="badge-hint" wx:if="{{nextBadge}}">再打卡 {{nextBadge.days - totalDays}} 天，解锁「{{nextBadge.name}}」</text>
+    </view>
+    <view class="badge-row">
+      <view
+        wx:for="{{badgeWall}}"
+        wx:key="days"
+        class="badge-item {{item.unlocked ? 'badge-on' : ''}}"
+      >
+        <view class="badge-circle">{{item.unlocked ? '✓' : item.days}}</view>
+        <view class="badge-name">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开始冥想大按钮 -->
+  <view class="footer">
+    <view class="hint">{{checkedToday ? '今天已打卡，随时可以再静坐一会儿' : '给自己十分钟，回到呼吸'}}</view>
+    <button class="btn-primary start-btn" bindtap="onStartMeditation">
+      {{checkedToday ? '再次冥想' : '开始冥想'}}
+    </button>
+    <view class="footer-links">
+      <view class="about-link" bindtap="onGoGratitude">感恩日记</view>
+      <view class="link-dot">·</view>
+      <view class="about-link" bindtap="onGoAbout">关于禅悦</view>
+    </view>
+  </view>
+
+  <!-- 打卡成功半屏弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}" bindtap="onCancelModal"></view>
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-title">本次静坐 {{pendingDuration}} 分钟</view>
+    <view class="modal-sub">当下的人生，就是最完美的了</view>
+
+    <view class="modal-label">此刻的心情（可选）</view>
+    <view class="mood-row">
+      <view
+        wx:for="{{moods}}"
+        wx:key="*this"
+        class="mood-item {{moodIndex === index ? 'mood-on' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectMood"
+      >{{item}}</view>
+    </view>
+
+    <view class="modal-label">随笔（可选）</view>
+    <textarea
+      class="note-input"
+      placeholder="记录一点此刻的感受…"
+      value="{{note}}"
+      bindinput="onNoteInput"
+      maxlength="200"
+    ></textarea>
+
+    <button class="btn-primary modal-btn" bindtap="onConfirmCheckin">完成打卡</button>
+  </view>
+
+  <!-- 徽章解锁祝贺弹窗 -->
+  <view class="modal-mask" wx:if="{{showBadgeModal}}" bindtap="onCloseBadgeModal"></view>
+  <view class="badge-modal" wx:if="{{showBadgeModal}}">
+    <view class="badge-modal-icon">✓</view>
+    <view class="badge-modal-title">解锁「{{newBadge.name}}」</view>
+    <view class="badge-modal-days">连续打卡 {{newBadge.days}} 天</view>
+    <view class="badge-modal-msg">{{newBadge.msg}}</view>
+    <view class="badge-gzh" wx:if="{{newBadge.days === 7}}">
+      <image class="badge-gzh-qr" src="/images/gzh-qrcode.jpg" mode="aspectFit" show-menu-by-longpress="{{true}}"></image>
+      <view class="badge-gzh-tx">
+        <view class="badge-gzh-name">公众号「彤彤姐」</view>
+        <view class="badge-gzh-desc">能陪你走到第 7 天，真好。想说说心里话，长按来公众号找我。</view>
+      </view>
+    </view>
+    <button class="btn-primary modal-btn" bindtap="onCloseBadgeModal">继续前行</button>
+  </view>
+
+  <!-- 日历当日详情弹窗（冥想记录 + 感恩日记） -->
+  <view class="modal-mask" wx:if="{{dayDetail}}" bindtap="onCloseDayDetail"></view>
+  <view class="day-detail-modal" wx:if="{{dayDetail}}">
+    <view class="day-detail-date">{{dayDetail.dateText}}</view>
+    <!-- 冥想记录 -->
+    <view class="day-detail-block" wx:if="{{dayDetail.checked}}">
+      <view class="day-detail-label">☾ 冥想</view>
+      <view class="day-detail-text">静坐 {{dayDetail.duration}} 分钟{{dayDetail.mood ? ' · 心情：' + dayDetail.mood : ''}}</view>
+      <view class="day-detail-note" wx:if="{{dayDetail.note}}">{{dayDetail.note}}</view>
+    </view>
+    <!-- 感恩日记 -->
+    <view class="day-detail-block" wx:if="{{dayDetail.hasGratitude}}">
+      <view class="day-detail-label day-detail-label-grat">✿ 感恩日记</view>
+      <view class="day-detail-text">{{dayDetail.gratText}}</view>
+    </view>
+    <button class="btn-primary modal-btn" bindtap="onCloseDayDetail">好的</button>
+  </view>
+
+  <!-- 静坐之后的引路弹窗（打卡成功后：引导去做今日一练 / 写感恩日记，自愿） -->
+  <view class="modal-mask" wx:if="{{showAfterModal}}" bindtap="onSkipAfter"></view>
+  <view class="gratitude-modal" wx:if="{{showAfterModal}}">
+    <view class="gratitude-modal-icon">☁</view>
+    <view class="gratitude-modal-title">静坐之后</view>
+    <view class="gratitude-modal-msg">{{afterDailyPending ? '带着这份安静，去做今天的每日陪伴小练习吧，两三分钟就好。' : '今天的每日陪伴已经完成啦。\n有没有一件小事，让你想轻轻说一声谢谢？'}}</view>
+    <button class="btn-primary modal-btn" wx:if="{{afterDailyPending}}" bindtap="onGoDailyPractice">去做今日一练</button>
+    <button class="btn-primary modal-btn" bindtap="onGoGratitude">写感恩日记</button>
+    <view class="gratitude-skip" bindtap="onSkipAfter">这次先不用</view>
+  </view>
+
+  <!-- 海报弹窗 -->
+  <view class="modal-mask" wx:if="{{showPoster}}" bindtap="onClosePoster"></view>
+  <view class="poster-modal" wx:if="{{showPoster}}">
+    <view class="poster-wrap">
+      <canvas
+        type="2d"
+        id="posterCanvas"
+        class="poster-canvas"
+      ></canvas>
+      <image
+        wx:if="{{posterUrl}}"
+        class="poster-preview"
+        src="{{posterUrl}}"
+        mode="aspectFit"
+      ></image>
+      <view wx:else class="poster-loading">正在生成海报…</view>
+    </view>
+    <button class="btn-primary modal-btn" bindtap="onSavePoster" disabled="{{!posterUrl || posterSaving}}">
+      {{posterSaving ? '保存中…' : '保存到相册'}}
+    </button>
+    <view class="poster-tip">保存后可发到朋友圈，把安宁传递给更多人</view>
+  </view>
+
+  <!-- 开屏疗愈海报：柔和奶油底 + 禅圆 + 今日禅语，约3秒后淡出（不满意可整体移除） -->
+  <view class="splash {{splashLeaving ? 'splash-leave' : ''}}" wx:if="{{showSplash}}">
+    <view class="splash-inner">
+      <view class="splash-zen-wrap">
+        <view class="splash-zen-ring"></view>
+        <view class="splash-zen-char">禅</view>
+      </view>
+      <!-- 节气/节日特别标签（如「白露 · 节气」），普通日子不显示 -->
+      <view class="splash-tag" wx:if="{{splashTag}}">{{splashTag}}</view>
+      <view class="splash-quote">「{{splashQuote}}」</view>
+      <view class="splash-brand">禅悦 · 正念打卡</view>
+    </view>
+  </view>
+</view>

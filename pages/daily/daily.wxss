@@ -1,0 +1,196 @@
+/* pages/daily/daily.wxss - 柔和奶油浅色系（与首页/感恩页一致） */
+.page {
+  min-height: 100vh;
+  padding: 32rpx 40rpx calc(48rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+/* 顶部天数导航 */
+.day-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+.day-nav-btn {
+  font-size: 26rpx;
+  color: #9C9184;
+  padding: 12rpx 8rpx;
+}
+.day-nav-center { text-align: center; }
+.day-nav-no {
+  font-size: 28rpx;
+  color: #6B8A66;
+  font-weight: 500;
+}
+.day-nav-tag {
+  font-size: 22rpx;
+  color: #C89268;
+  margin-top: 6rpx;
+}
+.day-nav-today { color: #7E9B77; }
+
+/* 标题 */
+.hero { text-align: center; margin-bottom: 36rpx; }
+.hero-title {
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #6B8A66;
+  letter-spacing: 2rpx;
+}
+.hero-sub {
+  font-size: 26rpx;
+  color: #9C9184;
+  margin-top: 14rpx;
+}
+
+/* 通用卡片 */
+.card {
+  background: #FFFDF8;
+  border-radius: 28rpx;
+  padding: 36rpx;
+  box-shadow: 0 8rpx 28rpx rgba(122, 106, 84, 0.08);
+  margin-bottom: 32rpx;
+}
+.card-tag {
+  font-size: 26rpx;
+  color: #7E9B77;
+  letter-spacing: 2rpx;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+.card-tag-practice { color: #C89268; }
+
+/* 卡片一：今日一思 */
+.thought-card { border: 1rpx solid rgba(126, 155, 119, 0.18); }
+.thought-text {
+  font-size: 30rpx;
+  color: #574E42;
+  line-height: 1.9;
+}
+
+/* 轻提醒：一句话，方便大家时刻谨记（定位：提醒+微习惯，不是任务） */
+.reminder-line {
+  display: flex;
+  align-items: center;
+  background: rgba(200, 146, 104, 0.08);
+  border: 1rpx solid rgba(200, 146, 104, 0.18);
+  border-radius: 18rpx;
+  padding: 18rpx 24rpx;
+  margin-top: 24rpx;
+}
+.reminder-star {
+  font-size: 26rpx;
+  color: #C89268;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+.reminder-text {
+  font-size: 26rpx;
+  color: #8C6B4F;
+  line-height: 1.6;
+  flex: 1;
+  letter-spacing: 1rpx;
+}
+
+/* 卡片二：今日一练 */
+.practice-card { border: 1rpx solid rgba(200, 146, 104, 0.15); }
+
+/* 语音引导条 */
+.voice-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(126, 155, 119, 0.1);
+  border: 1rpx solid rgba(126, 155, 119, 0.28);
+  border-radius: 20rpx;
+  padding: 22rpx 28rpx;
+  margin-bottom: 28rpx;
+}
+.voice-icon {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #8FAF88, #7E9B77);
+  border-radius: 50%;
+  margin-right: 22rpx;
+  flex-shrink: 0;
+}
+.voice-text {
+  font-size: 26rpx;
+  color: #6B8A66;
+  flex: 1;
+}
+/* 未录制：柔和占位（不可点击） */
+.voice-bar-off {
+  background: rgba(156, 145, 132, 0.08);
+  border-color: rgba(156, 145, 132, 0.18);
+}
+.voice-bar-off .voice-icon {
+  background: rgba(156, 145, 132, 0.25);
+  color: #FDFBF7;
+}
+.voice-bar-off .voice-text { color: #B3A99B; }
+
+.practice-step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 22rpx;
+}
+.practice-step-no {
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #C89268;
+  background: rgba(200, 146, 104, 0.12);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  margin-top: 4rpx;
+}
+.practice-step-text {
+  font-size: 28rpx;
+  color: #574E42;
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* 完成按钮 */
+.practice-done-btn {
+  margin-top: 32rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #8FAF88, #7E9B77);
+  border-radius: 100rpx;
+  padding: 24rpx 0;
+  font-weight: 500;
+}
+.practice-done-on {
+  background: rgba(126, 155, 119, 0.18);
+  color: #6B8A66;
+}
+.practice-count {
+  text-align: center;
+  font-size: 24rpx;
+  color: #9C9184;
+  margin-top: 18rpx;
+}
+.practice-hint {
+  text-align: center;
+  font-size: 24rpx;
+  color: #B3A99B;
+  margin-top: 24rpx;
+}
+
+/* 加载中 */
+.loading {
+  text-align: center;
+  color: #9C9184;
+  font-size: 26rpx;
+  padding-top: 120rpx;
+}

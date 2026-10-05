@@ -1,0 +1,9 @@
+{
+  "name": "zenjoyAdmin",
+  "version": "1.0.0",
+  "description": "禅悦管理后台数据查询（密码校验）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/meditate/meditate",
+    "pages/gratitude/gratitude",
+    "pages/daily/daily",
+    "pages/about/about",
+    "pages/lead/lead",
+    "pages/admin/admin"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F7F2EA",
+    "navigationBarTitleText": "禅悦",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F7F2EA",
+    "backgroundTextStyle": "dark"
+  },
+  "requiredBackgroundModes": ["audio"],
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

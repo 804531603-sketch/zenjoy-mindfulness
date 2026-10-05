@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="gift-icon" wx:if="{{!done}}">☾</view>
+
+  <block wx:if="{{!done}}">
+    <view class="title">把这份安静带回家</view>
+    <view class="sub">
+      你已经坚持静坐了一段时间，很不容易。
+      留下微信，我把录好的 7 天正念引导音频，一份不少地发给你——
+      睡不着的时候、心乱的时候，戴上耳机就能用。
+    </view>
+
+    <view class="form">
+      <input
+        class="input"
+        placeholder="微信号 或 手机号（填一个就好）"
+        placeholder-class="ph"
+        value="{{contact}}"
+        bindinput="onInput"
+        maxlength="60"
+        confirm-type="done"
+        bindconfirm="onSubmit"
+      />
+      <view class="btn-primary submit" bindtap="onSubmit">
+        {{submitting ? '正在送出…' : '送我这份礼物'}}
+      </view>
+      <view class="privacy">
+        只用于给你发音频，不会外传，也不会群发广告。你不填，也完全可以继续用禅悦。
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="done-icon">✓</view>
+    <view class="title">收到了，安静已经在路上</view>
+    <view class="sub">
+      我会在 24 小时内加你微信，备注「禅悦」。
+      如果等得急，也可以在公众号「彤彤姐」后台敲我一声。
+    </view>
+    <view class="btn-ghost back" bindtap="onGoBack">回去继续静坐</view>
+  </block>
+
+  <view class="skip" wx:if="{{!done}}" bindtap="onGoBack">这次先不用</view>
+</view>
